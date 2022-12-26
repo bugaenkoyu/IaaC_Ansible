@@ -1,0 +1,14 @@
+---
+# tasks file for fetch_linux_distro
+
+- name: Fetch linux distro name
+  ansible.builtin.shell: "cat /etc/*-release | grep DISTRIB_ID"
+  register: distro
+  ignore_errors: true
+
+
+- name: Fetch linux distro version
+  ansible.builtin.shell: "cat /etc/*-release | grep VERSION_ID"
+  register: version
+  ignore_errors: true
+

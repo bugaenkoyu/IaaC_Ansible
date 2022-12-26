@@ -1,0 +1,8 @@
+---
+# tasks file for create_empty_file
+
+- name: Creating an empty file
+  ansible.builtin.file:
+    path: "/etc/iaac"
+    state: touch
+    mode: 0500

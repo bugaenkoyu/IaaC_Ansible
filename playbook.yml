@@ -1,0 +1,27 @@
+---
+
+- name: Create_empty_file
+  hosts: iaas
+  become: yes
+  roles:
+    - role: create_empty_file
+
+
+- name: Defining variable for all hosts
+  hosts: all
+  become: yes
+  roles:
+    - role: fetch_linux_distro
+  
+  tasks:
+  - name: Print in registered variables
+    debug: 
+      msg: "Distro name:{{ distro.stdout[11:] }} {{ version.stdout[12:-1] }}"
+    
+ 
+  - name: Print hostnames together with registered variables
+    ansible.builtin.shell: "hostname"
+    register: host
+    
+  - debug:
+      msg: "Host:{{ host.stdout }}; Distro name:{{ distro.stdout[11:] }} {{ version.stdout[12:-1] }}"
